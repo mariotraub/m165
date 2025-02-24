@@ -1,4 +1,5 @@
-# A) Schema in Worten
+# A)
+## Schema in Worten  
 - Lernender
     - Ein Lernender hat n Prüfungen
     - Ein Lernender hat n Berufsbildner
@@ -16,6 +17,9 @@
     - Ein Semester hat
         - StartDatum
         - EndDatum
+## Konzeptionelles Diagramm
+![Png des Schemas](./scheme_konzeptionell.png)
+[*.drawio Datei](./scheme_konzeptionell.drawio)
 # B) Schema als Diagramm
 ![Png des Schemas](./scheme.png)
 [*.drawio Datei](./scheme.drawio)
