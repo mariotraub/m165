@@ -7,39 +7,27 @@ db.lernender.insertMany([
 		"_id": lernenderIds[0],
 		"name": "Mario",
 		"lehrstart": new Date("2023-07-01"),
-		"berufsbildner": [berufsbildnerIds[0], berufsbildnerIds[1]]
+		"berufsbildner": {
+			"name": "Christoph"
+		}
 	},
 	{
 		"_id": lernenderIds[1],
 		"name": "Stefan",
 		"lehrstart": new Date("2023-07-01"),
-		"berufsbildner": [berufsbildnerIds[2]]
+		"berufsbildner": {
+			"name": "Brigitte"
+		}
 	},
 	{
 		"_id": lernenderIds[2],
 		"name": "Elisabeth",
 		"lehrstart": new Date("2023-07-01"),
-		"berufsbildner": [berufsbildnerIds[2]]
+		"berufsbildner": {
+			"name": "Brigitte"
+		}
 	}
 ]);
-
-db.berufsbildner.insertOne({
-	"_id": berufsbildnerIds[0],
-	"name": "Christoph",
-	"lernende": [lernenderIds[0]]
-});
-
-db.berufsbildner.insertOne({
-	"_id": berufsbildnerIds[1],
-	"name": "Ursula",
-	"lernende": [lernenderIds[0]]
-});
-
-db.berufsbildner.insertOne({
-	"_id": berufsbildnerIds[2],
-	"name": "Brigitte",
-	"lernende": [lernenderIds[1], lernenderIds[2]]
-});
 
 db.pruefung.insertMany([
 	{
