@@ -1,4 +1,4 @@
-# Schema in Worten
+# A) Schema in Worten
 - Lernender
     - Ein Lernender hat n Noten
     - Ein Lernender hat n Berufsbildner
@@ -16,7 +16,7 @@
     - Ein Semester hat
         - StartDatum
         - EndDatum
-# Schema als Diagramm
+# B) Schema als Diagramm
 ![Png des Schemas](./scheme.png)
 [*.drawio Datei](./scheme.drawio)
 > [!NOTE]
