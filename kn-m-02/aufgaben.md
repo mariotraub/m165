@@ -1,8 +1,8 @@
 # A)
 ## Schema in Worten  
 - Lernender
-    - Ein Lernender hat n Prüfungen
-    - Ein Lernender hat n Berufsbildner
+    - Ein Lernender hat n Prüfungen und darin eine Note
+    - Ein Lernender hat 1 Berufsbildner
 - Berufsbildner
     - Ein Berufsbildner hat n Lernende
 - Prüfung
@@ -11,9 +11,12 @@
         - Gewichtung
         - Name
         - Datum
-- Note 
-    - Eine Note gehört zu einer Prüfung
-    - Eine Note gehört zu einem Lernenden
+    - Eine Prüfung ist Teil von einem Semester
+    - Eine Prüfung gehört zu einem Lernenden
+- Semester
+    - Ein Semester hat
+        - StartDatum
+        - EndDatum
 ## Konzeptionelles Diagramm
 ![Png des Schemas](./scheme_konzeptionell.png)
 [*.drawio Datei](./scheme_konzeptionell.drawio)
@@ -21,6 +24,7 @@
 ![Png des Schemas](./scheme.png)
 [*.drawio Datei](./scheme.drawio)
 > [!NOTE]
-> Ich habe den Berufsbildner verschachtelt, da in meiner DB jeder Lernender nur einen Berufsbildner haben kann.
+> Ich habe mich für die Verschachtelung beim Semester entschieden, da das nur ein kleines Objekt ist,
+> bei dem Redundanzen kein Problem sind
 # C)
 [Init-Script der DB und Collections](./init.js)
