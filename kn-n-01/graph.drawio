@@ -52,7 +52,7 @@
         <mxCell id="IYvJIk17ja52tGLPDcIV-16" value="startDatum: Date&lt;div&gt;endDatum: Date&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="465" y="400" width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="IYvJIk17ja52tGLPDcIV-17" value="datum: Date&lt;div&gt;gewichtung: float&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="IYvJIk17ja52tGLPDcIV-17" value="&lt;div&gt;name: str&lt;/div&gt;datum: Date&lt;div&gt;gewichtung: float&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="210" y="400" width="110" height="30" as="geometry" />
         </mxCell>
       </root>
