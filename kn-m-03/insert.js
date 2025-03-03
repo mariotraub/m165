@@ -3,6 +3,7 @@ var berufsbildnerIds = [ObjectId(), ObjectId()]
 var pruefungIds = [ObjectId(), ObjectId(), ObjectId(), ObjectId(), ObjectId()]
 var semesterIds = [ObjectId(), ObjectId()]
 
+
 db.semester.insertOne({
 	"_id": semesterIds[0],
 	"startDatum": new Date("2024-01-01"),
@@ -51,12 +52,15 @@ db.pruefung.insertMany([
 		"name": "Franzoesisch",
 		"datum": new Date("2024-05-04"),
 		"gewichtung": 1.0,
+		"semester": semesterIds[0],
 		"noten": [
 			{
-				"note": 5.4
+				"note": 5.4,
+				"lernender": lernenderIds[0]
 			},
 			{
-				"note": 4.5
+				"note": 4.5,
+				"lernender": lernenderIds[1]
 			}
 		]
 	},
@@ -65,15 +69,19 @@ db.pruefung.insertMany([
 		"name": "Mathematik",
 		"datum": new Date("2024-06-12"),
 		"gewichtung": 1.5,
+		"semester": semesterIds[0],
 		"noten": [
 			{
-				"note": 4.8
+				"note": 4.8,
+				"lernender": lernenderIds[0]
 			},
 			{
-				"note": 3.9
+				"note": 3.9,
+				"lernender": lernenderIds[1]
 			},
 			{
-				"note": 5.2
+				"note": 5.2,
+				"lernender": lernenderIds[2]
 			}
 		]
 	},
@@ -82,12 +90,15 @@ db.pruefung.insertMany([
 		"name": "Biologie",
 		"datum": new Date("2024-09-20"),
 		"gewichtung": 1.2,
+		"semester": semesterIds[1],
 		"noten": [
 			{
-				"note": 5.0
+				"note": 5.0,
+				"lernender": lernenderIds[2]
 			},
 			{
-				"note": 4.2
+				"note": 4.2,
+				"lernender": lernenderIds[1]
 			}
 		]
 	}
