@@ -29,7 +29,7 @@ db.berufsbildner.insertMany([
 	},
 	{
 		"_id": berufsbildnerIds[1],
-		"name": "Brigitte",
+		"name": "Hans",
 		"lernende": [
 			{
 				"_id": lernenderIds[1],
