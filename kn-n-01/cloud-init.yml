@@ -25,3 +25,4 @@ runcmd:
   - sudo sed -i 's/#server.default_listen_address/server.default_listen_address/g' /etc/neo4j/neo4j.conf
   - sudo systemctl restart neo4j.service
 # default username and password are "neo4j" (without the quotes)
+# new passwort: rootroot

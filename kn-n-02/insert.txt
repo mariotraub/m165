@@ -1,0 +1,30 @@
+CREATE 
+	(bb1:Berufsbildner {name: "Brigitte"}),
+	(bb2:Berufsbildner {name: "Hans"}),
+
+	(l1:Lernender {name: "Mario", lehrstart: date("2023-08-01")}),
+	(l2:Lernender {name: "Thomas", lehrstart: date("2023-08-01")}),
+	(l3:Lernender {name: "Christina", lehrstart: date("2023-08-01")}),
+
+	(p1:Pruefung {name: "Franzoesisch", datum: date("2024-05-04"), gewichtung: 1.0}),
+	(p2:Pruefung {name: "Mathematik", datum: date("2024-06-12"), gewichtung: 1.5}),
+	(p3:Pruefung {name: "Biologie", datum: date("2024-09-20"), gewichtung: 1.2}),
+
+	(s1:Semester {startDatum: date("2024-01-01"), endDatum: date("2024-07-01")}),
+	(s2:Semester {startDatum: date("2024-07-01"), endDatum: date("2025-01-01")}),
+
+	(l1)-[:ausgebildetVon]->(bb1),
+	(l2)-[:ausgebildetVon]->(bb2),
+	(l3)-[:ausgebildetVon]->(bb2),
+
+	(l1)-[:hatNoteIn {note: 5.4}]->(p1),
+	(l2)-[:hatNoteIn {note: 4.5}]->(p1),
+	(l1)-[:hatNoteIn {note: 4.8}]->(p2),
+	(l2)-[:hatNoteIn {note: 3.9}]->(p2),
+	(l3)-[:hatNoteIn {note: 5.2}]->(p2),
+	(l3)-[:hatNoteIn {note: 5.0}]->(p3),
+	(l2)-[:hatNoteIn {note: 4.2}]->(p3),
+
+	(p1)-[:gehoertZu]->(s1),
+	(p2)-[:gehoertZu]->(s1),
+	(p3)-[:gehoertZu]->(s2);
