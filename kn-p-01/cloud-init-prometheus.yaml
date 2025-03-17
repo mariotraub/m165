@@ -1,0 +1,71 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCPIIO8uY8oWIihDv0tCAbX6toyG1RYkaLZyfGD1L+I07K4CnwAVBSU+81vw3Yv5sN9tj2Ccve9kzEeCNMld2mDP/Tt7edkx2MCToVfVx+njqwY/XbMY9bfdRKJLhIoLavuVNLnnkSIXdtlGr3JF71hPHzBDMEo64ofPCQ8hPsGxL1u3efb12jcWcRhudKtv7Qh6cVE47Zj4xImfi6VlLqwzcKZ5oCqR/z1hLLL+/pS3eM5Qsor5wmAqNfH4+z5eE+pOkFm7a0Nkygv9jwXIqtJzFGKYDe6ciBD04pEovdvY0FTyiv2vksQOVgjtu2faG2Iv1HOG0JktCIwJ49OEgjT teacher
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCU1B7+jwdy08QksJMs+swxlmIAShQnxtkoXbdLrE4rWktWEUGQHpwJWr/9+PSGcFUxgsvEHcAFzR59WKwB4uL1PCaGDeAxL+2h2W4jyt/sF20Q7J6haJe/7Ke5YK5EZpmcWtI5lQmxDoL32NFYRrp5pnjZ9lxGLvIyO8xMiYSrzqPqzW58P2Cf6vQXIE5bCq+KWRCSE3T9/ZTMrGoSCC5/v+AotFVwRbK8+tPS/8hGG4MfMkdXCk2vwCxcuzrei0CZl1lhsubBajjBsdVyckbDY0oOoWIVgP5Jmnaho1/bZaKUl7FEMU8ULOQfq+kiJLxX01ww7AUQTCrvR7CzTwrv aws-key
+ssh_pwauth: false
+disable_root: false
+package_update: true   
+packages:
+  - apt-transport-https 
+  - software-properties-common
+  - wget
+  - prometheus
+  - prometheus-node-exporter
+write_files:
+  - path: /etc/prometheus/prometheus.yml
+    permissions: '0644'
+    content: |
+      global:
+        scrape_interval: 15s
+      scrape_configs:
+        - job_name: prometheus
+          static_configs:
+            - targets: ['localhost:9090']
+        - job_name: node
+          static_configs:
+            - targets: ['localhost:9100']
+      rule_files:
+        - "/etc/prometheus/rules.yml"
+
+  - path: /etc/prometheus/rules.yml
+    permissions: '0644'
+    content: |
+      groups:
+        - name: custom_rules
+          rules:
+            - record: node_memory_MemFree_percent
+              expr: 100 - (100 * node_memory_MemFree_bytes / node_memory_MemTotal_bytes)
+            - record: node_filesystem_free_percent
+              expr: 100 * node_filesystem_free_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}
+        - name: alert_rules
+          rules:
+            - alert: InstanceDown
+              expr: up == 0
+              for: 1m
+              labels:
+                serverity: critical
+              annotations:
+                summary: "Instance {{ $labels.instance }} down"
+                description: "Instance {{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute."
+runcmd:
+  - sudo systemctl enable prometheus.service
+  - sudo systemctl start prometheus.service
+  - sudo systemctl enable prometheus-node-exporter.service
+  - sudo systemctl start prometheus-node-exporter.service
+  - sudo systemctl restart prometheus
+  - sudo mkdir -p /etc/apt/keyrings/
+  - wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+  - echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+  - sudo apt-get update -y
+  - sudo apt-get install grafana-enterprise -y
+  - sudo systemctl daemon-reload
+  - sudo systemctl start grafana-server
+  - sudo systemctl enable grafana-server.service
+  - sudo systemctl restart grafana-server
+  
