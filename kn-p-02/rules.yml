@@ -1,0 +1,21 @@
+groups:
+  - name: custom_rules
+    rules:
+      - record: avg_cpu_usage:5m
+        expr: avg_over_time(cpu[5m])
+  - name: alert_rules
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"
+      - alert: HighCpuUsageWarning
+        expr: cpu > 80
+        labels:
+          severity: critical
+        annotations:
+          summary: "Die CPU-Nutzung ist über 80%!"
+          description: "Die CPU-Nutzung liegt bei {{ $value }}"
