@@ -2,6 +2,7 @@
 ## Verbindung über cqlsh
 ![cqlsh](../assets/2025-03-31-14-46-28.png)
 # B)
+![all queries](../assets/2025-04-07-16-33-17.png)
 ## Q1
 ![q1](../assets/2025-04-07-15-47-58.png)
 Bei diesem Screen ist es das Ziel alle Berufsbildner und ihre dazugehörigen Lernenden zu bekommen.

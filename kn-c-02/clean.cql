@@ -1,0 +1,3 @@
+TRUNCATE lernende_by_berufsbildner;
+TRUNCATE pruefungen_by_lernender;
+TRUNCATE pruefungen_by_semester;
